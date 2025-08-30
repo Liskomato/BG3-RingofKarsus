@@ -1,0 +1,5 @@
+treasure itemtypes "Common","Uncommon","Rare","Epic","Legendary","Divine","Unique"
+new treasuretable "LOW_SorcerousSundries_MystraVault_Weapon_Treasure"
+CanMerge 1
+new subtable "-1"
+object category "I_LSK_Ring_Karsus",1,0,0,0,0,0,0,0

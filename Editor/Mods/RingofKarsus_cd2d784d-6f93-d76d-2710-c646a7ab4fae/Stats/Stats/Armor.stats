@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stats stat_object_definition_id="239de60a-29b5-4010-bf7d-f6169d4ddd8a">
+  <stat_objects>
+    <stat_object is_substat="false">
+      <fields>
+        <field name="UUID" type="IdTableFieldDefinition" value="beadcf2a-42ee-45df-902f-71b4cf7b6ae7" />
+        <field name="Name" type="NameTableFieldDefinition" value="LSK_Ring_Karsus" />
+        <field name="Using" type="BaseClassTableFieldDefinition" value="df4f2627-398a-439f-86eb-b59f47eda577" />
+        <field name="RootTemplate" type="RootTemplateTableFieldDefinition" value="58c7f7ef-4c67-412b-88e6-6241d4b09fb1" />
+        <field name="Rarity" type="EnumerationTableFieldDefinition" value="Legendary" enumeration_type_name="Rarity" version="1" />
+        <field name="PassivesOnEquip" type="StringTableFieldDefinition" value="Passive_UnbreakableWill;" />
+      </fields>
+    </stat_object>
+  </stat_objects>
+</stats>

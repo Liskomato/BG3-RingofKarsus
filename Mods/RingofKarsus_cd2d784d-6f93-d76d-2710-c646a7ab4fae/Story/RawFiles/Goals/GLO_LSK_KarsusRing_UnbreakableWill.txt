@@ -1,0 +1,56 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// Check when Astral Tadpole is destroyed if you have unlocked the illithid powers tree. If not, reward the passive.
+IF
+QuestClosed("GLO_UnleashPowers")
+AND
+GetHostCharacter((CHARACTER)_Speaker)
+AND
+GetFlag((FLAG)GLO_Tadpole_Event_AstralTouchedTadpoleDestroyed_7c43d181-2bb0-ed4d-5fed-c19752617955,_Speaker,1)
+AND
+GetFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9f84be,_Speaker,0)
+THEN
+SetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,0);
+AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
+SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
+
+
+// Remove passive if tadpole tree is unlocked after this.
+IF
+FlagSet(GLO_Tadpole_Event_FirstConsumed_fab5ae97-23b5-4bf2-88ae-0b1bd57523d8,_Player,_)
+AND
+GetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Player,1)
+AND
+HasPassive(_Player,"Passive_UnbreakableWill_NoTadpoles",1)
+THEN
+RemovePassive(_Player,"Passive_UnbreakableWill_NoTadpoles");
+ClearFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Player,1);
+
+
+// Remove flag if refused potential flag is removed and the player doesn't have the Ring of Karsus.
+IF
+FlagCleared(LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,_)
+AND
+HasPassive(_Speaker,"Passive_UnbreakableWill",0)
+AND
+HasTaggedItem((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,"UNBREAKABLEWILL",0)
+THEN
+ClearFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
+
+
+// Set flag for claiming the Ring of Karsus
+IF
+AddedTo((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,_Player,_AddType)
+AND
+HasTaggedItem((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,"UNBREAKABLEWILL",1)
+AND
+DB_Players((CHARACTER)_Player)
+THEN
+SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,0);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "__Shared_Campaign"

@@ -1,0 +1,7 @@
+new entry "LSK_Ring_Karsus"
+type "Armor"
+using "ARM_Ring_C"
+data "RootTemplate" "58c7f7ef-4c67-412b-88e6-6241d4b09fb1"
+data "Rarity" "Legendary"
+data "PassivesOnEquip" "Passive_UnbreakableWill;"
+

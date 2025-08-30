@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<save>
+    <version major="4" minor="8" revision="0" build="200"/>
+    <region id="MetaData">
+        <node id="root">
+            <attribute id="GameProject" type="LSString" value=""/>
+            <attribute id="Module" type="LSString" value="cd2d784d-6f93-d76d-2710-c646a7ab4fae"/>
+            <attribute id="Name" type="LSString" value="RingofKarsus"/>
+            <attribute id="UUID" type="LSString" value="d06a5a07-1cec-d01d-4280-7c1f212a585b"/>
+            <attribute id="UpdatedDependencies" type="bool" value="true"/>
+            <children>
+                <node id="Categories"/>
+            </children>
+        </node>
+    </region>
+</save>
