@@ -16,6 +16,7 @@ THEN
 SetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,0);
 AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
+OpenMessageBox(_Speaker,"Congratulations! By rejecting the temptation of the tadpoles completely, you have gained an Unbreakable Will!");
 
 
 // Remove passive if tadpole tree is unlocked after this.
@@ -28,6 +29,7 @@ HasPassive(_Player,"Passive_UnbreakableWill_NoTadpoles",1)
 THEN
 RemovePassive(_Player,"Passive_UnbreakableWill_NoTadpoles");
 ClearFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Player,1);
+OpenMessageBox((CHARACTER)_Player,"Because you have consumed a tadpole, you have lost your Unbreakable Will...");
 
 
 // Remove flag if refused potential flag is removed and the player doesn't have the Ring of Karsus.
@@ -50,6 +52,7 @@ AND
 DB_Players((CHARACTER)_Player)
 THEN
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,0);
+OpenMessageBox(_Player,"You have acquired the Ring of Karsus, one of Archmage Karsus's long-forgotten artifacts. It is said that the Ring could potentially be used alongside the Netherstones to command the Crown...");
 EXITSECTION
 
 ENDEXITSECTION
