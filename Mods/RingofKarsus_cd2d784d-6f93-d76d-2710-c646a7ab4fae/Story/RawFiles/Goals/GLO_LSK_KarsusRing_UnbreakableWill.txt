@@ -45,9 +45,7 @@ ClearFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-483
 
 // Set flag for claiming the Ring of Karsus
 IF
-AddedTo((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,_Player,_AddType)
-AND
-HasTaggedItem((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,"UNBREAKABLEWILL",1)
+TemplateAddedTo((ITEMROOT)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,_Item,_Player,_AddType)
 AND
 DB_Players((CHARACTER)_Player)
 THEN
