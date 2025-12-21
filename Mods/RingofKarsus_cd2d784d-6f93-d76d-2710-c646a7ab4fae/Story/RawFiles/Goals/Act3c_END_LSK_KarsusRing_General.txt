@@ -9,24 +9,23 @@ DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82c
 AND
 GetHostCharacter((CHARACTER)_Player)
 AND
-GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
-AND
-NOT IsOnlyPlayerInParty(_Player,1)
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
 THEN
+TemplateAddTo((ITEMROOT)LOOT_MF_Tadpole_Supreme_A_a313a568-9b27-4b94-8ad8-50fcc374179f,_Player,1,0);
 SetFlag((FLAG)END_General_State_PartyMemberIsMindFlayer_3c42b03b-c51c-4f06-a5a3-a5ee416d9d8b,_Player,0,0);
+SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
+SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
 
-// Flags that are set if you free Orpheus while solo.
+// Remove hidden tadpole once dialog with Orpheus is over.
 IF
-DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+DialogEnded((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
 AND
 GetHostCharacter((CHARACTER)_Player)
 AND
-GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
-AND
-IsOnlyPlayerInParty(_Player,1)
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
 THEN
-SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
-SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
+TemplateRemoveFrom((ITEMROOT)LOOT_MF_Tadpole_Supreme_A_a313a568-9b27-4b94-8ad8-50fcc374179f,_Player,1);
+
 
 // Exiting Astral Prism
 PROC
@@ -34,7 +33,7 @@ PROC_END_IllithidOptions_TryLeaveAstralPrism((CHARACTER)_Player)
 AND
 DB_Players((CHARACTER)_Player)
 AND
-GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
 THEN
 SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
 SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
@@ -46,7 +45,7 @@ PROC_END_HighHallInterior_TryToClimbBrainStem((CHARACTER)_Player)
 AND
 DB_Players((CHARACTER)_Player)
 AND
-GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
 THEN
 SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
 SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
