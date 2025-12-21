@@ -1,0 +1,67 @@
+Version 1
+SubGoalCombiner SGC_AND
+INITSECTION
+
+KBSECTION
+// Checking if you have the Unbreakable Will passive (either via ring or destroying the astral tadpole) by the time you free Orpheus. If yes, then we act as if another player has become mind flayer in our stead.
+IF
+DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+AND
+NOT IsOnlyPlayerInParty(_Player,1)
+THEN
+SetFlag((FLAG)END_General_State_PartyMemberIsMindFlayer_3c42b03b-c51c-4f06-a5a3-a5ee416d9d8b,_Player,0,0);
+
+// Flags that are set if you free Orpheus while solo.
+IF
+DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+AND
+GetHostCharacter((CHARACTER)_Player)
+AND
+GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+AND
+IsOnlyPlayerInParty(_Player,1)
+THEN
+SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
+SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
+
+// Exiting Astral Prism
+PROC
+PROC_END_IllithidOptions_TryLeaveAstralPrism((CHARACTER)_Player)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+THEN
+SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
+SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
+ClearFlag((FLAG)END_General_State_LeaveWithoutStoryItemsAttempt_d8a2a19f-662a-1df2-cee2-782d32c2d344,_Player,0,0);
+
+// Climbing the Brainstem to the final battle.
+PROC
+PROC_END_HighHallInterior_TryToClimbBrainStem((CHARACTER)_Player)
+AND
+DB_Players((CHARACTER)_Player)
+AND
+GetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,1)
+THEN
+SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
+SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
+ClearFlag((FLAG)END_General_State_LeaveWithoutStoryItemsAttempt_d8a2a19f-662a-1df2-cee2-782d32c2d344,_Player,0,0);
+
+// One last addition to the query for the final check.
+QRY
+QRY_END_General_CanProceedTowardsFinale()
+AND
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
+AND
+QRY_END_General_PartyHasCompleteCrownController()
+THEN
+DB_NOOP(1);
+EXITSECTION
+
+ENDEXITSECTION
+ParentTargetEdge "Act3c"
