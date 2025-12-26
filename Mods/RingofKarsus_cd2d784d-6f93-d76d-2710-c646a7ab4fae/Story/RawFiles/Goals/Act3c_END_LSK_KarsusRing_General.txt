@@ -3,28 +3,46 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-// Checking if you have the Unbreakable Will passive (either via ring or destroying the astral tadpole) by the time you free Orpheus. If yes, then we act as if another player has become mind flayer in our stead.
-IF
-DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
-AND
-GetHostCharacter((CHARACTER)_Player)
-AND
-DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
-THEN
-TemplateAddTo((ITEMROOT)LOOT_MF_Tadpole_Supreme_A_a313a568-9b27-4b94-8ad8-50fcc374179f,_Player,1,0);
-SetFlag((FLAG)END_General_State_PartyMemberIsMindFlayer_3c42b03b-c51c-4f06-a5a3-a5ee416d9d8b,_Player,0,0);
-SetFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27,_Player,0,0);
-SetFlag((FLAG)END_General_State_PartyHasSupremeTadpole_a0ee98a9-7272-415a-95f6-f11c86048593,_Player,0,0);
+// When you betray the Emperor while having the Unbreakable Will buff, the Supreme Tadpole will float to you by its own volition, being one of the components to have the no mind flayer ending.
+//IF
+//FlagSet((FLAG)END_IllithidOptions_Event_EmperorBetrayal_411c2575-bfbc-449c-9762-edad4285aafd,_Player,_Inst)
+//AND
+//GetHostCharacter((CHARACTER)_Host)
+//AND
+//DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
+//THEN
+//SetFlag((FLAG)END_IllithidOptions_Event_GiveSupremeTadpole_a8128df9-dea6-4a4d-961d-9dbdc49ebb38,_Host,1);
+//SetFlag((FLAG)END_IllithidOptions_Knows_CanDelayUse_13b3bbcc-0d7a-7ead-473a-e72d3d6324d9,_Host,1);
+//OpenMessageBox(_Host,"A Supreme Tadpole was lured into your inventory as the Emperor departs, thanks to your Unbreakable Will...");
 
-// Remove hidden tadpole once dialog with Orpheus is over.
+// Checking if you have the Unbreakable Will passive (either via ring or destroying the astral tadpole) by the time you free Orpheus. 
+// If yes, then you will get a supreme tadpole during your conversation with Orpheus. This will allow you to skip ceremorphosis requirement altogether.
+//IF
+//DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
 IF
-DialogEnded((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+FlagSet((FLAG)END_IllithidOptions_State_OrpheusIsFree_3b747050-1be0-432e-9de6-e48faa4b74bb,_Speaker,_Inst)
 AND
 GetHostCharacter((CHARACTER)_Player)
 AND
 DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
 THEN
-TemplateRemoveFrom((ITEMROOT)LOOT_MF_Tadpole_Supreme_A_a313a568-9b27-4b94-8ad8-50fcc374179f,_Player,1);
+//SetFlag((FLAG)END_General_State_PartyMemberIsMindFlayer_3c42b03b-c51c-4f06-a5a3-a5ee416d9d8b);
+SetFlag((FLAG)END_IllithidOptions_Event_GiveSupremeTadpole_a8128df9-dea6-4a4d-961d-9dbdc49ebb38,_Player,1);
+SetFlag((FLAG)END_IllithidOptions_Knows_CanDelayUse_13b3bbcc-0d7a-7ead-473a-e72d3d6324d9,_Player,1);
+OpenMessageBox(_Player,"DEBUG: Unbreakable Will recognized, Supreme Tadpole acquired.");
+
+
+// Remove hidden tadpole once the exit portal is open.
+//IF
+//DialogEnded((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+IF
+FlagSet((FLAG)END_IllithidOptions_State_ExitPortalAvailable_b97872a1-59cc-40cd-8963-e06be614adc0,_Char,_Inst)
+AND
+DB_GlobalFlag((FLAG)END_IllithidOptions_State_OrpheusIsFree_3b747050-1be0-432e-9de6-e48faa4b74bb)
+AND
+DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999)
+THEN
+PROC_END_General_RemoveSupremeTadpole();
 
 
 // Exiting Astral Prism

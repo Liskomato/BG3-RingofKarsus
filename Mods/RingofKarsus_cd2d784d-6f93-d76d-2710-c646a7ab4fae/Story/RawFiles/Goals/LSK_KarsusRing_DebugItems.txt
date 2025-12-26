@@ -5,38 +5,31 @@ INITSECTION
 KBSECTION
 IF
 //GameModeStarted("Campaign",1,_IsStoryReload)
-TextEvent("KarsusTadpole")
+TextEvent("KarsusTadpoles")
 AND
 GetHostCharacter(_Player)
 THEN
 TemplateAddTo((ITEMROOT)LOOT_MF_Tadpole_Astral_A_4a82e6f2-839f-434e-addf-b07dd1578194,_Player,1,1);
-QuestAdd(_Player,"GLO_UnleashPowers");
-QuestUpdate(_Player,"GLO_UnleashPowers","GLO_UnleashPowers_UseAstralTadpole");
+TemplateAddTo((ITEMROOT)LOOT_MF_Tadpole_Supreme_A_a313a568-9b27-4b94-8ad8-50fcc374179f,_Player,1,1);
 
 
 IF
-TextEvent("KarsusTadpole_RefusePotential")
+TextEvent("KarsusRing")
 AND
 GetHostCharacter(_Player)
 THEN
-QuestAdd(_Player,"GLO_UnleashPowers");
-QuestUpdate(_Player,"GLO_UnleashPowers","GLO_UnleashPowers_UseAstralTadpole");
-QuestClose("GLO_UnleashPowers");
-SetFlag((FLAG)GLO_Tadpole_Event_AstralTouchedTadpoleDestroyed_7c43d181-2bb0-ed4d-5fed-c19752617955,_Player,1);
-ClearFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9f84be,_Player,0);
-ClearFlag((FLAG)GLO_Tadpole_Event_FirstConsumed_fab5ae97-23b5-4bf2-88ae-0b1bd57523d8,_Player,0);
+TemplateAddTo((ITEMROOT)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,_Player,1,1);
 
 IF
-TextEvent("KarsusTadpole_EmbracePotential")
+TextEvent("KarsusWill")
 AND
-GetHostCharacter(_Player)
+GetHostCharacter((CHARACTER)_Speaker)
 THEN
-DB_Tadpole_AllowUIEvents(1);
-DB_Tadpole_Activated(_Player);
-DB_GLO_TadpoleTreeEnabled(1);
-DB_GLO_DaisyAccepted(_Player);
-SetFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9f84be,_Player,0);
-SetFlag((FLAG)GLO_Tadpole_Event_FirstConsumed_fab5ae97-23b5-4bf2-88ae-0b1bd57523d8,_Player,0);
+SetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,0);
+AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
+SetTag(_Speaker,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
+SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
+OpenMessageBox(_Speaker,"Congratulations! By rejecting the temptation of the tadpoles completely, you have gained an Unbreakable Will!");
 EXITSECTION
 
 ENDEXITSECTION

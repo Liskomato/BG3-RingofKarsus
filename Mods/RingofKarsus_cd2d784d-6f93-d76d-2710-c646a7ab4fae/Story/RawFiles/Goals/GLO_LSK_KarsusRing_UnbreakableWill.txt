@@ -15,6 +15,7 @@ NOT GetFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9
 THEN
 SetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,0);
 AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
+SetTag(_Speaker,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
 OpenMessageBox(_Speaker,"Congratulations! By rejecting the temptation of the tadpoles completely, you have gained an Unbreakable Will!");
 
@@ -41,6 +42,7 @@ AND
 NOT HasTaggedItem((ITEM)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,"UNBREAKABLEWILL",1)
 THEN
 ClearFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
+ClearTag(_Speaker,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 
 
 // Set flag for claiming the Ring of Karsus
@@ -52,6 +54,7 @@ AND
 NOT DB_GlobalFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1)
 THEN
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,0);
+SetTag(_Player,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 
 // First time gaining the Ring of Karsus, you receive a messsage box telling you about its importance.
 IF
@@ -70,6 +73,7 @@ AND
 NOT DB_GlobalFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1)
 THEN
 ClearFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Player,0);
+ClearTag(_Player,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 EXITSECTION
 
 ENDEXITSECTION
