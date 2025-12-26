@@ -20,38 +20,48 @@ KBSECTION
 IF
 FlagSet((FLAG)END_IllithidOptions_State_OrpheusIsFree_3b747050-1be0-432e-9de6-e48faa4b74bb,_Speaker,_Inst)
 AND
+GetHostCharacter((CHARACTER)_Player)
+AND
 DB_GlobalFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999) // Checking that Unbreakable Will is active.
 AND
-NOT DB_GlobalFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27) // If you already have the tadpole from the Emperor, just use that instead.
+NOT DB_GlobalFlag((FLAG)END_General_State_SupremeTadpoleAvailable_0177c452-90cc-4c29-83b8-4acaa2902b27) // If you already have the tadpole from the Emperor, we just use that instead.
 THEN
 //SetFlag((FLAG)END_General_State_PartyMemberIsMindFlayer_3c42b03b-c51c-4f06-a5a3-a5ee416d9d8b);
 SetFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0);
+SetFlag((FLAG)END_IllithidOptions_Event_GiveSupremeTadpole_a8128df9-dea6-4a4d-961d-9dbdc49ebb38,_Player,1);
+SetFlag((FLAG)END_IllithidOptions_Knows_CanDelayUse_13b3bbcc-0d7a-7ead-473a-e72d3d6324d9,_Player,1);
 
+
+//IF
+//DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+//AND
+//GetHostCharacter((CHARACTER)_Player)
+//AND
+//DB_GlobalFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0)
+//THEN
+
+
+
+// If you leave the conversation with Orpheus before making your decision, the player is informed about the Supreme Tadpole in their inventory.
 IF
-DialogStarted((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
+DialogEnded((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
 AND
 GetHostCharacter((CHARACTER)_Player)
 AND
 DB_GlobalFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0)
+AND
+NOT DB_GlobalFlag((FLAG)END_IllithidOptions_State_ExitPortalAvailable_b97872a1-59cc-40cd-8963-e06be614adc0)
 THEN
-SetFlag((FLAG)END_IllithidOptions_Event_GiveSupremeTadpole_a8128df9-dea6-4a4d-961d-9dbdc49ebb38,_Player,1);
-SetFlag((FLAG)END_IllithidOptions_Knows_CanDelayUse_13b3bbcc-0d7a-7ead-473a-e72d3d6324d9,_Player,1);
-OpenMessageBox(_Player,"DEBUG: Unbreakable Will recognized, Supreme Tadpole acquired.");
+OpenMessageBox(_Player,"If you want to proceed without anyone transforming, just tell Orpheus you will transform. He knows you have the means to do it later.");
+OpenMessageBox(_Player,"Your Unbreakable Will summoned a Supreme Tadpole to your inventory as you freed Orpheus. You can transform into a Mind Flayer if you want to, but it isn't necessary anymore...");
 
-
-// We "hide" the tadpole from inventory by temporarily deleting it if you take time to assess your decisions while talking with Orpheus.
+// Remove hidden tadpole for good once the exit portal is open.
 IF
 DialogEnded((DIALOGRESOURCE)END_IllithidOptions_OrpheusFreed_dd0df229-54bf-82cb-9869-a33edb46a57f,_InstanceID)
 AND
 DB_GlobalFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0)
-THEN
-PROC_END_General_RemoveSupremeTadpole();
-
-// Remove hidden tadpole for good once the exit portal is open.
-IF
-FlagSet((FLAG)END_IllithidOptions_State_ExitPortalAvailable_b97872a1-59cc-40cd-8963-e06be614adc0,_Char,_Inst)
 AND
-DB_GlobalFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0)
+DB_GlobalFlag((FLAG)END_IllithidOptions_State_ExitPortalAvailable_b97872a1-59cc-40cd-8963-e06be614adc0)
 THEN
 PROC_END_General_RemoveSupremeTadpole();
 ClearFlag((FLAG)LSK_KarsusRing_SupremeTadpoleGifted_fc94c99d-5bda-42f1-95ac-795b53a47ae0);
