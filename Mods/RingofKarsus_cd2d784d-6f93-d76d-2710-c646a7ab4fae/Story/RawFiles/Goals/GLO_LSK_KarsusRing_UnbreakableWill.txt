@@ -3,21 +3,69 @@ SubGoalCombiner SGC_AND
 INITSECTION
 
 KBSECTION
-// Check when Astral Tadpole is destroyed if you have unlocked the illithid powers tree. If not, reward the passive.
-IF
-DialogEnded((DIALOGRESOURCE)GLO_Tadpole_UseAstralTadpole_a995e01c-7374-d37d-0816-08158bbdd166,_Inst)
+// Main checks that you have destroyed the Astral Tadpole and that you don't have the Illithid skill tree unlocked at all.
+QRY
+QRY_LSK_KarsusRing_CanEarnUnbreakableWill()
 AND
-DB_GlobalFlag((FLAG)GLO_Tadpole_Event_AstralTouchedTadpoleDestroyed_7c43d181-2bb0-ed4d-5fed-c19752617955)
+DB_GlobalFlag((FLAG)GLO_Tadpole_Event_AstralTouchedTadpoleDestroyed_7c43d181-2bb0-ed4d-5fed-c19752617955) // Checks that the Astral Tadpole is destroyed.
 AND
-GetHostCharacter((CHARACTER)_Speaker)
+NOT DB_GlobalFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9f84be) // Checks that Illithid skill tree isn't unlocked.
 AND
-NOT GetFlag((FLAG)GLO_Tadpole_State_TreeUnlocked_f7691d3d-345b-4984-8eed-6f238a9f84be,_Speaker,1)
+NOT DB_GlobalFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1) // To avoid overlap
+THEN
+DB_NOOP(1);
+
+PROC
+PROC_LSK_KarsusRing_GrantUnbreakableWill((CHARACTER)_Speaker)
 THEN
 SetFlag((FLAG)LSK_KarsusRing_RefusedPotential_7110b9c7-c2e3-435e-b912-0c672885dde1,_Speaker,0);
 AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
 SetTag(_Speaker,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
 OpenMessageBox(_Speaker,"Congratulations! By rejecting the temptation of the tadpoles completely, you have gained an Unbreakable Will!");
+
+// Main Check: When the Astral-Touched Tadpole is destroyed - GLO_Tadpole_UseAstralTadpole
+IF
+DialogEnded((DIALOGRESOURCE)GLO_Tadpole_UseAstralTadpole_a995e01c-7374-d37d-0816-08158bbdd166,_Inst)
+AND
+QRY_LSK_KarsusRing_CanEarnUnbreakableWill()
+AND
+GetHostCharacter((CHARACTER)_Speaker)
+THEN
+PROC_LSK_KarsusRing_GrantUnbreakableWill(_Speaker);
+
+// Failsafe #1: Arrival to the Morphic Pool - END_MorphicPool_Arrival - (DIALOGRESOURCE)END_MorphicPool_Arrival_2beffc77-9608-ca0c-894c-4e70d0cc6e52
+IF
+DialogEnded((DIALOGRESOURCE)END_MorphicPool_Arrival_2beffc77-9608-ca0c-894c-4e70d0cc6e52,_Inst)
+AND
+QRY_LSK_KarsusRing_CanEarnUnbreakableWill()
+AND
+GetHostCharacter((CHARACTER)_Speaker)
+THEN
+PROC_LSK_KarsusRing_GrantUnbreakableWill(_Speaker);
+
+
+// Failsafe #2: Confronting the Netherbrain at the Morphic Pool - END_MorphicPool_NetherbrainConfrontation - (DIALOGRESOURCE)END_MorphicPool_NetherbrainConfrontation_ce5161a9-9580-379a-6e1f-476a4ca688cf
+// DialogStarted here instead of DialogEnded because we want the buff to be active at the brain confrontation itself.
+IF
+DialogStarted((DIALOGRESOURCE)END_MorphicPool_NetherbrainConfrontation_ce5161a9-9580-379a-6e1f-476a4ca688cf,_Inst)
+AND
+QRY_LSK_KarsusRing_CanEarnUnbreakableWill()
+AND
+GetHostCharacter((CHARACTER)_Speaker)
+THEN
+PROC_LSK_KarsusRing_GrantUnbreakableWill(_Speaker);
+
+
+// Failsafe #3: Entering the Astral Prism after Morphic Pool - END_IllithidOptions_EmperorProposal - (DIALOGRESOURCE)END_IllithidOptions_EmperorProposal_6769199a-452f-5a13-9178-55a899cccf59
+IF
+DialogEnded((DIALOGRESOURCE)END_IllithidOptions_EmperorProposal_6769199a-452f-5a13-9178-55a899cccf59,_Inst)
+AND
+QRY_LSK_KarsusRing_CanEarnUnbreakableWill()
+AND
+GetHostCharacter((CHARACTER)_Speaker)
+THEN
+PROC_LSK_KarsusRing_GrantUnbreakableWill(_Speaker);
 
 
 // Remove passive if tadpole tree is unlocked after this.
@@ -65,7 +113,7 @@ AND
 NOT DB_GlobalFlag((FLAG)LSK_KarsusRing_DiscoveredRingOfKarsus_7a769f1d-11e4-4536-b6dd-e9de92287c1a)
 THEN
 SetFlag((FLAG)LSK_KarsusRing_DiscoveredRingOfKarsus_7a769f1d-11e4-4536-b6dd-e9de92287c1a,_Player,0);
-OpenMessageBox(_Player,"You have acquired the Ring of Karsus, one of Archmage Karsus's long-forgotten artifacts. It is said that the Ring could potentially be used alongside the Netherstones to command the Crown...");
+OpenMessageBox(_Player,"You have acquired a Ring of Karsus, one of Archmage Karsus's many long-forgotten artifacts. It is said that even one of these rings could potentially be used to control the Crown of Karsus itself...");
 
 IF
 TemplateRemovedFrom((ITEMROOT)LSK_Ring_Karsus_58c7f7ef-4c67-412b-88e6-6241d4b09fb1,_Item,_Player)

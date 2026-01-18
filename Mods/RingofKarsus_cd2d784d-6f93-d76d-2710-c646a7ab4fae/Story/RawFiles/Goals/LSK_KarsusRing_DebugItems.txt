@@ -30,6 +30,11 @@ AddPassive(_Speaker,"Passive_UnbreakableWill_NoTadpoles");
 SetTag(_Speaker,(TAG)UNBREAKABLEWILL_2ab7755b-b30b-47db-8f32-babbe3f67b1a);
 SetFlag((FLAG)LSK_KarsusRing_GainedUnbreakableWill_0568e1f6-1c30-4764-865b-4832fd5e8999,_Speaker,0);
 OpenMessageBox(_Speaker,"Congratulations! By rejecting the temptation of the tadpoles completely, you have gained an Unbreakable Will!");
+
+IF
+TextEvent("KarsusDestroyTadpole")
+THEN
+SetFlag((FLAG)GLO_Tadpole_Event_AstralTouchedTadpoleDestroyed_7c43d181-2bb0-ed4d-5fed-c19752617955);
 EXITSECTION
 
 ENDEXITSECTION
