@@ -3,3 +3,7 @@ new treasuretable "LOW_SorcerousSundries_MystraVault_Weapon_Treasure"
 CanMerge 1
 new subtable "-1"
 object category "I_LSK_Ring_Karsus",1,0,0,0,0,0,0,0
+new treasuretable "LOW_DevilsFee_Diabolist_Trade_Magic"
+CanMerge 1
+new subtable "-1"
+object category "I_LSK_Ring_Karsus",1,0,0,0,0,0,0,0

@@ -2,8 +2,8 @@
 <contentList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <content contentuid="h1c47ad3fgc20bgc73eg9004g43d66c9b3c90" version="1">Unbreakable Will</content>
   <content contentuid="h75cb92bbg7b75g6c99gea50g0e8500046883" version="2">Allows you to use &lt;LSTag Type="Spell" Tooltip="Target_END_Mindflayer_CrownDomination"&gt;Karsus' Compulsion&lt;/LSTag&gt; without being a mind flayer.</content>
-  <content contentuid="h0d7d76e2g65fbg8fceg6a5cg7205c715c924" version="3">Ring of Karsus</content>
-  <content contentuid="hd89f798dg8022g37e6g86a8g6dfd34db8554" version="3">A mythical ring said to have once belonged to the Netherese archmage Karsus himself. It is said that this ring can be used to command the Crown if the Netherstones aren't enough.</content>
+  <content contentuid="h0d7d76e2g65fbg8fceg6a5cg7205c715c924" version="4">Ring of Karsus</content>
+  <content contentuid="hd89f798dg8022g37e6g86a8g6dfd34db8554" version="4">One of the mythical rings said to have once belonged to the Netherese archmage Karsus. It has been theorized that Karsus used these rings to help himself keep control of his Crown as he attempted to rise into godhood, with some legends even going to the lengths of saying that they helped him "think like an illithid".</content>
   <content contentuid="haf21e399g1a3bgb8c8g3eaeg1cd9d6d2628c" version="2">Unbreakable Will</content>
   <content contentuid="hc791a691g812cg1e84gf406g843135ef2ee9" version="2">This person has an ironclad will that can challenge even an illithid elder brain.</content>
   <content contentuid="hf2a3520eg3eb3g0b3fgc1e1g36306d464bd6" version="1">Refusing to embrace the tadpoles' potential has given you an Unbreakable Will, allowing you to use &lt;LSTag Type="Spell" Tooltip="Target_END_Mindflayer_CrownDomination"&gt;Karsus' Compulsion&lt;/LSTag&gt; without needing to become a mind flayer.</content>
