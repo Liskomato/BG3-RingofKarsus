@@ -6,7 +6,7 @@
         <field name="UUID" type="IdTableFieldDefinition" value="4e617b6b-acbe-42e1-8b76-985d90bd65c4" />
         <field name="Name" type="NameTableFieldDefinition" value="Passive_UnbreakableWill" />
         <field name="DisplayName" type="TranslatedStringTableFieldDefinition" handle="h1c47ad3fgc20bgc73eg9004g43d66c9b3c90" version="1" />
-        <field name="Description" type="TranslatedStringTableFieldDefinition" handle="h75cb92bbg7b75g6c99gea50g0e8500046883" version="2" />
+        <field name="Description" type="TranslatedStringTableFieldDefinition" handle="h75cb92bbg7b75g6c99gea50g0e8500046883" version="7" />
         <field name="Icon" type="StringTableFieldDefinition" value="PassiveFeature_HalfIllithid" />
         <field name="Properties" type="EnumerationListTableFieldDefinition" value="Highlighted" enumeration_type_name="PassiveFlags" version="1" />
         <field name="Boosts" type="StringTableFieldDefinition" value="UnlockSpell(Target_END_Mindflayer_CrownDomination);" />
@@ -17,7 +17,7 @@
         <field name="UUID" type="IdTableFieldDefinition" value="2e633469-2855-46cd-b565-4853e796fbea" />
         <field name="Name" type="NameTableFieldDefinition" value="Passive_UnbreakableWill_NoTadpoles" />
         <field name="Using" type="BaseClassTableFieldDefinition" value="4e617b6b-acbe-42e1-8b76-985d90bd65c4" />
-        <field name="Description" type="TranslatedStringTableFieldDefinition" handle="hf2a3520eg3eb3g0b3fgc1e1g36306d464bd6" version="1" />
+        <field name="Description" type="TranslatedStringTableFieldDefinition" handle="hf2a3520eg3eb3g0b3fgc1e1g36306d464bd6" version="4" />
       </fields>
     </stat_object>
   </stat_objects>

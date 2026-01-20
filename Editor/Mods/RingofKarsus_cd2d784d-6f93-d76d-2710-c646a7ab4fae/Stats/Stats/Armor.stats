@@ -9,7 +9,7 @@
         <field name="RootTemplate" type="RootTemplateTableFieldDefinition" value="58c7f7ef-4c67-412b-88e6-6241d4b09fb1" />
         <field name="Rarity" type="EnumerationTableFieldDefinition" value="Legendary" enumeration_type_name="Rarity" version="1" />
         <field name="PassivesOnEquip" type="StringTableFieldDefinition" value="Passive_UnbreakableWill;" />
-        <field name="ValueScale" type="FloatTableFieldDefinition" value="1000" />
+        <field name="ValueScale" type="FloatTableFieldDefinition" value="700" />
       </fields>
     </stat_object>
   </stat_objects>
